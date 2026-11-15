@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clear Days</title>
+<meta name="theme-color" content="#2F6BFF"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@500;700;800&family=Noto+Sans+Telugu:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF5FF;--card:#fff;--ink:#14213D;--mut:#55608a;--line:#14213D;--blue:#2F6BFF;--red:#D63A3F;--yel:#FFC83D;--mint:#2EC4A0;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1428;--card:#18203D;--ink:#F1F4FF;--mut:#A7B0D6;--line:#6672A8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1428;--card:#18203D;--ink:#F1F4FF;--mut:#A7B0D6;--line:#6672A8;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.6 Nunito,'Noto Sans Telugu',system-ui,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+h1,h2{font-family:Fredoka,'Noto Sans Telugu',sans-serif;margin:0;line-height:1.3}h1{font-size:30px}h2{font-size:21px;margin-bottom:8px}
+p{margin:4px 0}.mut{color:var(--mut);font-size:14px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.lang{display:flex;border:2px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+.lang button{font:800 14px Nunito,'Noto Sans Telugu',sans-serif;border:0;background:var(--card);color:var(--ink);padding:6px 12px;cursor:pointer}
+.lang button.on{background:var(--blue);color:#fff}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;box-shadow:4px 4px 0 var(--line);padding:16px;margin-bottom:16px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#2F6BFF,#6A4DFF);color:#fff;margin-top:14px}
+.hero::after{content:"";position:absolute;right:-34px;top:-34px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#FFC83D 0 38%,rgba(255,200,61,0) 70%);opacity:.85;pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hrow{display:flex;gap:18px;align-items:center}
+.ring{width:130px;height:130px;border-radius:50%;background:conic-gradient(var(--yel) calc(var(--p)*1%),rgba(255,255,255,.28) 0);display:grid;place-items:center;flex:none}
+.ring div{width:102px;height:102px;border-radius:50%;background:#2447C9;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;text-align:center}
+.ring b{font:700 40px Fredoka,sans-serif}.ring span{font-size:13px;font-weight:800}
+.stats b{display:block;font:700 24px Fredoka,sans-serif}.stats div{margin-bottom:6px;font-weight:700}
+.nx{margin-top:12px;font-weight:800}
+.tabs{display:flex;gap:8px;padding:2px 0 14px}
+.tab{flex:1;font:800 15px Nunito,'Noto Sans Telugu',sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:9px;cursor:pointer}
+.tab.on{background:var(--ink);color:var(--bg)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.b{font:800 18px Fredoka,'Noto Sans Telugu',sans-serif;color:#fff;border:2px solid var(--line);border-radius:18px;padding:20px 8px;cursor:pointer;box-shadow:4px 4px 0 var(--line)}
+.b:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--line)}
+.b.dry{background:var(--blue)}.b.slip{background:var(--red)}
+.btn{font:800 15px Nunito,'Noto Sans Telugu',sans-serif;background:var(--yel);color:#14213D;border:2px solid var(--line);border-radius:12px;padding:9px 14px;box-shadow:3px 3px 0 var(--line);cursor:pointer}
+.btn.alt{background:var(--mint)}.btn.sm{padding:4px 12px;font-size:18px}.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;font-size:13px;padding:5px 8px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+input,textarea{font:600 15px Nunito,'Noto Sans Telugu',sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:9px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:60px;margin-top:6px}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.hd,.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.hd{text-align:center;color:var(--mut);font-weight:800;font-size:13px;margin-bottom:6px}
+.c{aspect-ratio:1;border:2px solid transparent;border-radius:14px;background:var(--bg);color:var(--ink);font:800 15px Nunito,sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;padding:0}
+.c small{font-size:12px;height:13px}
+.c.dry{background:var(--blue);color:#fff}.c.slip{background:var(--red);color:#fff}
+.c.td{border-color:var(--yel)}.c.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--yel)}
+.c:disabled{opacity:.35;cursor:default}
+.leg{display:flex;gap:14px;margin-top:12px;font-size:14px;font-weight:700;flex-wrap:wrap}.leg i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.medal{border:2px solid var(--line);border-radius:20px;padding:14px 10px 12px;text-align:center;background:var(--card);box-shadow:3px 3px 0 var(--line)}
+.medal.big{grid-column:1/-1}
+.coin{width:78px;height:78px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;font-size:38px;background:var(--c);border:3px solid var(--line);box-shadow:inset 0 -7px 0 rgba(0,0,0,.14),0 0 0 6px color-mix(in srgb,var(--c) 30%,transparent)}
+.medal.off .coin{background:var(--bg);filter:grayscale(1);opacity:.5;box-shadow:none}
+.medal b{display:block;line-height:1.3}
+.medal input{margin-top:8px;font-size:13px;padding:7px 8px}
+.tag{display:inline-block;border-radius:999px;padding:1px 10px;font-size:13px;font-weight:800;margin-top:4px;background:var(--mint);color:#14213D}.off .tag{background:var(--bg);color:var(--mut)}
+.tp{font:700 18px Fredoka,sans-serif;word-break:break-all;background:var(--bg);border-radius:10px;padding:8px 10px;margin:8px 0}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:800;transition:transform .25s;z-index:20;max-width:90%;text-align:center}
+#toast.show{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+ol{padding-left:20px;margin:6px 0}
+</style></head><body><div class="wrap" id="app"></div><div id="toast" role="status" aria-live="polite"></div>
+<script>
+const K='clear-days-v1',$=s=>document.querySelector(s);
+const MS=[[1,'🌱','First clear day','మొదటి మంచి రోజు','#7BDFA3'],[3,'🍀','Three in a row','వరుసగా మూడు','#5CC8FF'],[7,'⭐','One clear week','ఒక మంచి వారం','#FFC83D'],[14,'🌟','Two weeks strong','రెండు వారాల బలం','#FF9F43'],[30,'🏅','One month clear','ఒక నెల మద్యం లేకుండా','#FF7AA2'],[50,'🏆','50 days of good, non-alcoholic life','50 రోజులు: మంచి, మద్యం లేని జీవితం','#F5B700'],[100,'👑','100 days: a new chapter','100 రోజులు: కొత్త అధ్యాయం','#9B7BFF'],[200,'💎','200 days: unstoppable','200 రోజులు: ఆపలేని శక్తి','#35C7E8'],[365,'🌈','One full year, free and strong','ఒక సంవత్సరం: స్వేచ్ఛగా, బలంగా','#C0F05A']];
+const LN=[["Today is the only day you have to win.","ఈ రోజు గెలవడమే మీ లక్ష్యం."],["Cravings pass. Breathe and wait ten minutes.","కోరికలు దాటిపోతాయి. శ్వాస తీసుకుని పది నిమిషాలు ఆగండి."],["Every clear day is a gift to you and your family.","ప్రతి మంచి రోజు మీకు, మీ కుటుంబానికి ఒక బహుమతి."],["A slip is a stumble, not the end of the road.","తప్పటడుగు అంటే దారి ముగియడం కాదు."],["Drink water, take a walk, call someone.","నీళ్లు తాగండి, నడవండి, ఎవరికైనా ఫోన్ చేయండి."],["Proud of you for trying again.","మళ్లీ ప్రయత్నిస్తున్నందుకు గర్వంగా ఉంది."],["You are stronger than this moment.","మీరు ఈ క్షణం కంటే బలవంతులు."]];
+const SQ=[["Falling down is part of the journey. Getting up is what counts.","పడిపోవడం ప్రయాణంలో భాగం. లేవడమే ముఖ్యం."],["You are not starting from zero. You are starting from experience.","మీరు సున్నా నుండి మొదలుపెట్టడం లేదు. అనుభవంతో మొదలుపెడుతున్నారు."],["One hard day does not define you. Your next choice does.","ఒక కష్టమైన రోజు మిమ్మల్ని నిర్వచించదు. మీ తదుపరి నిర్ణయం నిర్వచిస్తుంది."],["Be kind to yourself. Healing is not a straight line.","మీ పట్ల దయగా ఉండండి. కోలుకోవడం సరళరేఖ కాదు."],["The people who love you are still on your side.","మిమ్మల్ని ప్రేమించేవారు ఇంకా మీ వైపే ఉన్నారు."],["Tomorrow morning, you can choose again.","రేపు ఉదయం మీరు మళ్లీ ఎంచుకోవచ్చు."],["Every clear day you built is still a real achievement.","మీరు సాధించిన ప్రతి మంచి రోజు నిజమైన విజయమే."],["Courage is trying again after a hard day.","కష్టమైన రోజు తర్వాత మళ్లీ ప్రయత్నించడమే ధైర్యం."]];
+const X={sub:['One day at a time.','ఒక్కో రోజు, ఒక్కో అడుగు.'],dc:['days clear','రోజులు'],tot:['total clear days','మొత్తం మంచి రోజులు'],bst:['best streak','ఉత్తమ వరుస'],
+nxt:[(n,b)=>`${n} more ${n==1?'day':'days'} to ${b}`,(n,b)=>`${b} కి ఇంకా ${n} రోజులు`],all:['Every badge unlocked. Amazing.','అన్ని బ్యాడ్జ్‌లు సాధించారు. అద్భుతం.'],
+home:['Home','హోమ్'],bad:['Badges','బ్యాడ్జ్‌లు'],fam:['Family','కుటుంబం'],today:['Today','ఈ రోజు'],
+how:[l=>`${l}: how did it go?`,l=>`${l}: ఎలా గడిచింది?`],mc:['Marked as clear ✓','మంచి రోజుగా గుర్తించారు ✓'],ms:['Marked as slip ✕','తప్పిన రోజుగా గుర్తించారు ✕'],
+yd:['✓ Stayed dry','✓ తాగలేదు'],ys:['✕ I slipped','✕ తాగాను'],nph:['Note: craving, trigger, or what helped','నోట్: కోరిక, కారణం, లేదా ఏది సహాయపడింది'],clr:['Clear this day','ఈ రోజు గుర్తును తొలగించు'],
+okt:['It’s okay. Tomorrow is a fresh start.','పర్వాలేదు. రేపు కొత్త ప్రారంభం.'],okb:[n=>`One slip does not erase your ${n} clear days. Drink some water and start again.`,n=>`ఒక తప్పు మీ ${n} మంచి రోజులను చెరిపేయదు. కొంచెం నీళ్లు తాగి మళ్లీ మొదలుపెట్టండి.`],
+tf:['Tell your family?','కుటుంబానికి చెప్పాలా?'],yes:['Yes, tell them','అవును, చెప్పండి'],nn:['Not now','ఇప్పుడు వద్దు'],ok:['Okay','సరే'],lc:['Clear day','మంచి రోజు'],ls:['Slip','తప్పిన రోజు'],
+mo:[(a,s)=>`${a} clear, ${s} slips this month`,(a,s)=>`ఈ నెల ${a} మంచి రోజులు, ${s} తప్పిన రోజులు`],
+bt:['Your badges','మీ బ్యాడ్జ్‌లు'],bs:['Pick a reward you will enjoy for each badge.','ప్రతి బ్యాడ్జ్‌కు మీకు నచ్చిన బహుమతిని ఎంచుకోండి.'],rp:['Your reward (favourite meal, trip)','మీ బహుమతి (ఇష్టమైన భోజనం, ప్రయాణం)'],
+row:[n=>`${n} ${n==1?'day':'days'} in a row`,n=>`వరుసగా ${n} రోజులు`],un:['Unlocked ✓','సాధించారు ✓'],lk:[n=>`${n} more ${n==1?'day':'days'}`,n=>`ఇంకా ${n} రోజులు`],
+ft:['Family alerts','కుటుంబ అలర్ట్‌లు'],fi:['Only turn this on if you want your family to know when you need support. You are in control.','మీకు సహాయం కావాల్సినప్పుడు కుటుంబానికి తెలియాలనుకుంటేనే దీన్ని ఆన్ చేయండి. నియంత్రణ మీదే.'],
+nl:['Name shown in messages','సందేశాల్లో చూపే పేరు'],dad:['Dad','నాన్న'],tl:['Your private topic. Share it with family only.','మీ ప్రైవేట్ టాపిక్. కుటుంబంతో మాత్రమే పంచుకోండి.'],
+ct:['Create private topic','ప్రైవేట్ టాపిక్ సృష్టించు'],nt:['Make a new topic','కొత్త టాపిక్'],on:['Alerts are on. Turn off','అలర్ట్‌లు ఆన్‌లో ఉన్నాయి. ఆఫ్ చేయి'],off:['Turn alerts on','అలర్ట్‌లు ఆన్ చేయి'],ts:['Send test','పరీక్ష పంపు'],
+hs:['How to set it up','ఎలా సెట్ చేయాలి'],s1:['Everyone installs the free ntfy app.','అందరూ ఉచిత ntfy యాప్ ఇన్‌స్టాల్ చేయాలి.'],s2:['Each person taps + and subscribes to the topic above.','ప్రతి ఒక్కరూ + నొక్కి పై టాపిక్‌కు సబ్‌స్క్రైబ్ అవ్వాలి.'],s3:['Turn alerts on, then tap Send test.','అలర్ట్‌లు ఆన్ చేసి, పరీక్ష పంపు నొక్కండి.'],
+fn:['Messages are short and kind. Slips are only sent when you tap “Yes, tell them”. Badge messages go out automatically. Anyone who knows the topic can read messages, so keep it private. Sending works from the GitHub link, not inside Claude.','సందేశాలు చిన్నవిగా, ప్రేమగా ఉంటాయి. “అవును, చెప్పండి” నొక్కినప్పుడే తప్పిన విషయం పంపబడుతుంది. బ్యాడ్జ్ సందేశాలు ఆటోమేటిక్‌గా వెళ్తాయి. టాపిక్ తెలిసినవారు సందేశాలు చదవగలరు, కాబట్టి రహస్యంగా ఉంచండి. పంపడం GitHub లింక్‌లో మాత్రమే పనిచేస్తుంది, Claude లోపల కాదు.'],
+sv:['Your data is saved in this browser only.','మీ డేటా ఈ బ్రౌజర్‌లోనే సేవ్ అవుతుంది.'],
+bu:['Badge unlocked:','బ్యాడ్జ్ సాధించారు:'],gd:['Clear day saved. Well done!','మంచి రోజు సేవ్ అయింది. బాగా చేశారు!'],tdn:['Your family has been told.','కుటుంబానికి చెప్పాం.'],fl:['Could not send. Check the Family tab.','పంపలేకపోయాం. కుటుంబం ట్యాబ్ చూడండి.'],
+tok:['Test sent. Check your phone.','పరీక్ష పంపాం. ఫోన్ చూడండి.'],tfl:['Could not send. Turn alerts on and use the GitHub link.','పంపలేకపోయాం. అలర్ట్‌లు ఆన్ చేసి GitHub లింక్ వాడండి.'],
+pm:[(n,c)=>`🎉 ${n} has stayed alcohol-free for ${c} days! 💙`,(n,c)=>`🎉 ${n} ${c} రోజులుగా మద్యం లేకుండా ఉన్నారు! 💙`],
+ps:[n=>`${n} had a hard day today. A call or a hug would help. 💙`,n=>`${n}కు ఈ రోజు కష్టంగా గడిచింది. ఒక ఫోన్ కాల్ లేదా కౌగిలింత సహాయపడుతుంది. 💙`],pt:['Test from Clear Days. All set! ✅','క్లియర్ డేస్ నుండి పరీక్ష. అంతా సిద్ధం! ✅'],
+pv:['Previous month','గత నెల'],nv:['Next month','వచ్చే నెల'],
+pf:[b=>`Your streak of ${b} ${b==1?'day was':'days was'} under 5, so it goes back to zero. Your total clear days stay safe.`,b=>`${b} రోజుల స్ట్రీక్ 5 కంటే తక్కువ, కాబట్టి అది సున్నాకి వెళ్లింది. మొత్తం మంచి రోజులు సురక్షితం.`],
+pr:[b=>`This is a second slip soon after the last one, so your streak of ${b} days goes to zero. Your total clear days stay safe.`,b=>`చివరి తప్పు తర్వాత త్వరలోనే ఇది రెండో తప్పు, కాబట్టి ${b} రోజుల స్ట్రీక్ సున్నాకి వెళ్లింది. మొత్తం మంచి రోజులు సురక్షితం.`],
+pp:[(b,a)=>`You lost 5 streak days: ${b} became ${a}. Your total clear days stay safe.`,(b,a)=>`5 స్ట్రీక్ రోజులు తగ్గాయి: ${b} నుండి ${a}కి. మొత్తం మంచి రోజులు సురక్షితం.`],
+rh:['How streaks work','స్ట్రీక్ నియమాలు'],rb:['A slip costs 5 streak days. If the streak is under 5 days, or this is a second slip before 7 clear days have passed, the streak goes to zero. Total clear days and badges are never lost.','ఒక తప్పుకు 5 స్ట్రీక్ రోజులు తగ్గుతాయి. స్ట్రీక్ 5 రోజుల కంటే తక్కువ ఉన్నా, లేదా 7 మంచి రోజులు గడవకముందే రెండో తప్పు జరిగినా, స్ట్రీక్ సున్నా అవుతుంది. మొత్తం మంచి రోజులు, బ్యాడ్జ్‌లు ఎప్పటికీ పోవు.']};
+const fmt=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>fmt(new Date()),diff=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let S=null;try{S=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+S=Object.assign({d:{},n:{},rw:{},topic:'',on:false,nm:'',lang:/^te/i.test(navigator.language||'')?'te':'en'},S||{});
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const te=()=>S.lang=='te',t=(k,...a)=>{const v=X[k][te()?1:0];return typeof v=='function'?v(...a):v},nm=()=>S.nm||t('dad'),loc=()=>te()?'te-IN':'en-IN';
+let tab='home',sel=today(),ask=false,vm=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+function toast(m){const e=$('#toast');e.textContent=m;e.className='show';setTimeout(()=>e.className='',2600)}
+const dry=()=>Object.keys(S.d).filter(k=>S.d[k].s=='dry').sort();
+function sim(){let s=0,b=0,p=null,ls=null,dc=0,w=null;
+for(const k of Object.keys(S.d).sort()){const e=S.d[k];if(p&&diff(p,k)>1)s=0;w=null;
+if(e.s=='dry'){s++;b=Math.max(b,s);if(ls)dc++}
+else{w=s<5?'pf':(ls&&dc<7)?'pr':'pp';s=w=='pp'?s-5:0;ls=k;dc=0}
+p=k}
+return{c:p&&diff(p,today())>1?0:s,b,w}}
+const cur=()=>sim().c,best=()=>sim().b;
+async function ping(m){if(!S.on||!S.topic)return false;try{const r=await fetch('https://ntfy.sh/'+S.topic,{method:'POST',body:m});return r.ok}catch(e){return false}}
+function setDay(s){const k=sel,b0=cur(),bb=best();if(s=='clear')delete S.d[k];else S.d[k]={s};
+if(s=='slip'&&k==today()){const r=sim();ask={b:b0,a:r.c,w:b0>0?r.w:null,q:Math.floor(Math.random()*SQ.length)}}else ask=false;
+if(s=='dry'&&k==today()){const c=cur(),m=MS.find(x=>x[0]==c);if(m&&c>bb){toast(m[1]+' '+t('bu')+' '+m[te()?3:2]);ping(t('pm',nm(),c))}else toast(t('gd'))}
+save();render()}
+async function tell(){ask=false;const ok=await ping(t('ps',nm()));toast(ok?t('tdn'):t('fl'));render()}
+function setL(l){S.lang=l;document.documentElement.lang=l;save();render()}
+function render(){
+const c=cur(),b=best(),tt=dry().length,nx=MS.find(x=>x[0]>c),T=[['home','home'],['rew','bad'],['fam','fam']],ln=LN[Math.floor(Date.now()/864e5)%LN.length][te()?1:0];
+$('#app').innerHTML=`<div class="top"><div><h1>Clear Days</h1><p class="mut">${t('sub')}</p></div><div class="lang"><button class="${te()?'':'on'}" onclick="setL('en')">English</button><button class="${te()?'on':''}" onclick="setL('te')">తెలుగు</button></div></div>
+<section class="card hero"><div class="hrow"><div class="ring" style="--p:${nx?c/nx[0]*100:100}"><div><b>${c}</b><span>${t('dc')}</span></div></div>
+<div class="stats"><div><b>${tt}</b>${t('tot')}</div><div><b>${b}</b>${t('bst')}</div></div></div>
+<p class="nx">${nx?t('nxt',nx[0]-c,nx[1]+' '+nx[te()?3:2]):t('all')}</p><p style="margin-top:6px">${ln}</p></section>
+<nav class="tabs">${T.map(x=>`<button class="tab ${tab==x[0]?'on':''}" onclick="tab='${x[0]}';render()">${t(x[1])}</button>`).join('')}</nav>
+${({home:vHome,rew:vRew,fam:vFam})[tab]()}<p class="mut" style="text-align:center">${t('sv')}</p>`}
+function vHome(){const e=S.d[sel],lb=sel==today()?t('today'):new Date(sel+'T00:00').toLocaleDateString(loc(),{day:'numeric',month:'short'});
+return (ask?`<div class="card" style="background:var(--yel);color:#14213D"><h2>${t('okt')}</h2><p>${t('okb',dry().length)}</p>${ask.w?`<p style="font-weight:800;margin-top:6px">${t(ask.w,ask.b,ask.a)}</p>`:''}<p style="margin-top:8px;font-style:italic">“${SQ[ask.q][te()?1:0]}”</p>${S.on&&S.topic?`<p style="font-weight:800;margin-top:8px">${t('tf')}</p><div style="display:flex;gap:8px;margin-top:6px"><button class="btn alt" onclick="tell()">${t('yes')}</button><button class="btn" onclick="ask=false;render()">${t('nn')}</button></div>`:`<button class="btn" style="margin-top:8px" onclick="ask=false;render()">${t('ok')}</button>`}</div>`:'')+
+`<div class="card"><h2>${t('how',lb)}</h2>${e?`<p class="mut">${e.s=='dry'?t('mc'):t('ms')}</p>`:''}
+<div class="two"><button class="b dry" onclick="setDay('dry')">${t('yd')}</button><button class="b slip" onclick="setDay('slip')">${t('ys')}</button></div>
+<textarea aria-label="${esc(t('nph'))}" placeholder="${esc(t('nph'))}" oninput="S.n[sel]=this.value;save()">${esc(S.n[sel]||'')}</textarea>
+${e?`<button class="btn ghost" style="margin-top:6px" onclick="setDay('clear')">${t('clr')}</button>`:''}</div><div class="card">${cal()}</div><div class="card"><h2>${t('rh')}</h2><p class="mut">${t('rb')}</p></div>`}
+function cal(){const y=vm.getFullYear(),m=vm.getMonth(),f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),td=today();let h='',a=0,s=0;
+for(let i=0;i<f;i++)h+='<i></i>';
+for(let d=1;d<=n;d++){const k=fmt(new Date(y,m,d)),e=S.d[k];if(e)e.s=='dry'?a++:s++;
+h+=`<button class="c ${e?e.s:''} ${k==td?'td':''} ${k==sel?'sel':''}" ${k>td?'disabled':''} onclick="sel='${k}';ask=false;render()" aria-label="${k} ${e?(e.s=='dry'?t('lc'):t('ls')):''}">${d}<small>${e?(e.s=='dry'?'✓':'✕'):''}</small></button>`}
+const nxt=new Date(y,m+1,1)>new Date(),W=te()?['ఆ','సో','మం','బు','గు','శు','శ']:'SMTWTFS'.split('');
+return `<div class="nav"><button class="btn sm" onclick="vm=new Date(${y},${m-1},1);render()" aria-label="${t('pv')}">‹</button><h2 style="margin:0">${vm.toLocaleDateString(loc(),{month:'long',year:'numeric'})}</h2><button class="btn sm" ${nxt?'disabled style="opacity:.4"':''} onclick="vm=new Date(${y},${m+1},1);render()" aria-label="${t('nv')}">›</button></div>
+<div class="hd">${W.map(x=>`<span>${x}</span>`).join('')}</div><div class="cal">${h}</div>
+<div class="leg"><span><i style="background:var(--blue)"></i>${t('lc')}</span><span><i style="background:var(--red)"></i>${t('ls')}</span></div><p class="mut" style="margin-top:6px">${t('mo',a,s)}</p>`}
+function vRew(){const b=best();
+return `<div class="card"><h2>${t('bt')}</h2><p class="mut">${t('bs')}</p></div><div class="grid">${MS.map(m=>{const on=b>=m[0],big=m[0]>=50;return `<div class="medal ${on?'':'off'} ${big?'big':''}" style="--c:${m[4]}"><div class="coin">${m[1]}</div><b>${esc(m[te()?3:2])}</b><p class="mut">${t('row',m[0])}</p><span class="tag">${on?t('un'):t('lk',m[0]-b)}</span>
+<input placeholder="${esc(t('rp'))}" value="${esc(S.rw[m[0]]||'')}" oninput="S.rw[${m[0]}]=this.value;save()" aria-label="${esc(t('rp'))}">${on&&S.rw[m[0]]?`<p style="font-weight:800;margin-top:6px">🎁 ${esc(S.rw[m[0]])}</p>`:''}</div>`}).join('')}</div>`}
+function vFam(){return `<div class="card"><h2>${t('ft')}</h2><p>${t('fi')}</p>
+<p class="mut" style="margin-top:8px">${t('nl')}</p><input value="${esc(S.nm)}" placeholder="${esc(t('dad'))}" oninput="S.nm=this.value;save()" aria-label="${esc(t('nl'))}">
+${S.topic?`<p class="mut" style="margin-top:10px">${t('tl')}</p><div class="tp">${esc(S.topic)}</div>`:''}
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn" onclick="mk()">${S.topic?t('nt'):t('ct')}</button>
+${S.topic?`<button class="btn alt" onclick="S.on=!S.on;save();render()">${S.on?t('on'):t('off')}</button><button class="btn ghost" onclick="tst()">${t('ts')}</button>`:''}</div></div>
+<div class="card"><h2>${t('hs')}</h2><ol><li>${t('s1')}</li><li>${t('s2')}</li><li>${t('s3')}</li></ol><p class="mut">${t('fn')}</p></div>`}
+function mk(){const a=new Uint8Array(14);crypto.getRandomValues(a);S.topic='cleardays-'+[...a].map(x=>'abcdefghjkmnpqrstuvwxyz23456789'[x%31]).join('');save();render()}
+async function tst(){const ok=await ping(t('pt'));toast(ok?t('tok'):t('tfl'))}
+document.documentElement.lang=S.lang;render();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
